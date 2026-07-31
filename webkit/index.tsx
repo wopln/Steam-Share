@@ -1,5 +1,7 @@
 import { SteamShareController } from "./application/steam-share-controller";
 import { CopyLinkAction } from "./services/copy-link-action";
+import { FavoritesStore } from "./services/favorites-store";
+import { RecentContactsStore } from "./services/recent-contacts-store";
 import { ShareService } from "./services/share-service";
 import { SteamChatBridge } from "./platform/steam-chat-bridge";
 import { FriendPicker } from "./ui/friend-picker";
@@ -19,7 +21,11 @@ export default function SteamShare(): void {
 
   const controller = new SteamShareController(
     new ShareService(new CopyLinkAction()),
-    new FriendPicker(new SteamChatBridge()),
+    new FriendPicker(
+      new SteamChatBridge(),
+      new RecentContactsStore(),
+      new FavoritesStore(),
+    ),
     new NativeShareButton(),
     new ToastPresenter(),
   );
