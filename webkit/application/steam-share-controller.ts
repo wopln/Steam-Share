@@ -50,22 +50,34 @@ export class SteamShareController {
     const originalPushState = window.history.pushState;
     const originalReplaceState = window.history.replaceState;
 
-    window.history.pushState = function pushState(
+    const wrappedPushState = function pushState(
+      this: History,
       ...args: Parameters<History["pushState"]>
     ): void {
       originalPushState.apply(this, args);
       schedule();
     };
-    window.history.replaceState = function replaceState(
+    const wrappedReplaceState = function replaceState(
+      this: History,
       ...args: Parameters<History["replaceState"]>
     ): void {
       originalReplaceState.apply(this, args);
       schedule();
     };
 
+    window.history.pushState = wrappedPushState;
+    window.history.replaceState = wrappedReplaceState;
+
     return () => {
-      window.history.pushState = originalPushState;
-      window.history.replaceState = originalReplaceState;
+      // Do not clobber a wrapper installed by Steam or another plugin after
+      // Steam Share started. Only restore methods that still point at our own
+      // wrappers; otherwise leave the newer owner untouched.
+      if (window.history.pushState === wrappedPushState) {
+        window.history.pushState = originalPushState;
+      }
+      if (window.history.replaceState === wrappedReplaceState) {
+        window.history.replaceState = originalReplaceState;
+      }
       restoreListeners();
     };
   }
