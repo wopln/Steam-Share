@@ -38,11 +38,3 @@ The game link is also copied to your clipboard as a fallback.
 - Drag-and-drop favorite management.
 - Friend cards that can be selected directly, without checkboxes.
 
-## Building from source
-
-```powershell
-bun install
-bun run build
-```
-
-Restart Steam after building so Millennium can load the new files.
