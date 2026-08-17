@@ -11,6 +11,7 @@
         "@steambrew/webkit": "^5.8.4",
         "@types/react": "19.1.1",
         "@types/react-dom": "19.1.1",
+        "typescript": "5.9.3",
       },
     },
   },
