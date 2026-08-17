@@ -1,35 +1,48 @@
 # Steam Share
 
-Steam Share is a Millennium plugin that adds a native-style **Share** button to Steam Store game pages.
+Steam Share adds a **Share** button to game pages in the Steam Store. Click it, choose one or more friends, and send them the game's Store link without leaving Steam.
 
-The button appears alongside Steam's existing **Wishlist**, **Follow**, and **Ignore** actions. Clicking it opens a friend picker where you can select one or multiple friends and send them the current game's Store link.
+The button sits next to Steam's **Wishlist**, **Follow**, and **Ignore** buttons and uses the same styling, so it feels at home on the page.
 
-### Share Button
+## What it looks like
+
+### Share button
 
 ![Steam Share button](images/share-button.png)
 
-### Share Menu
+### Friend picker
 
 ![Steam Share menu](images/share-menu.png)
 
-## Features
+## How to use it
 
-- Native-style Share button integrated into Steam Store game pages.
-- Select and send the game link to one or multiple friends.
-- Separate **Favorites** and **All Friends** sections.
-- Search through your Steam friends.
-- Displays a **Recent** badge beside the most recently used recipient.
-- Select friends by clicking their profile cards.
-- Drag and drop friends between the available friend sections.
-- Automatically copies the game link as a fallback.
+1. Open a game's Store page in the Steam desktop client.
+2. Click **Share**.
+3. Pick the friends you want to send the game to.
+4. Click **Send**.
+
+## Friend picker
+
+- Keep the people you share with most in **Favorites**.
+- Drag friends in or out of Favorites to update the list.
+- Recently contacted friends are marked with a small **Recent** badge.
+- Search your full friends list.
+- Select any mix of favorites and other friends before sending.
+
+The game link is also copied to your clipboard as a fallback.
 
 ## What's new in v1.1.0
 
-- Added the **Favorites** section.
-- Added the **Recent** recipient badge.
-- Added drag-and-drop friend management.
-- Replaced checkboxes with profile-card selection for a smoother experience.
+- A Favorites section for the friends you contact most.
+- A Recent badge for the last person you shared with.
+- Drag-and-drop favorite management.
+- Friend cards that can be selected directly, without checkboxes.
 
-## Where to find it
+## Building from source
 
-Open any game page in the Steam Store. The **Share** button will appear beside the existing Wishlist, Follow, and Ignore buttons.
+```powershell
+bun install
+bun run build
+```
+
+Restart Steam after building so Millennium can load the new files.
