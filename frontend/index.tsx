@@ -6,6 +6,7 @@ import {
   ModalRoot,
   showModal,
 } from "@steambrew/client";
+import { createElement, useEffect, useRef } from "react";
 import { FriendPicker } from "../webkit/ui/friend-picker";
 import { FavoritesStore } from "../webkit/services/favorites-store";
 import { RecentContactsStore } from "../webkit/services/recent-contacts-store";
@@ -326,10 +327,10 @@ function showLibraryToast(message, anchor) {
 }
 
 function LibraryPickerModalHost({ context, onFinished }) {
-  const host = globalThis.SP_REACT.useRef(null);
-  const started = globalThis.SP_REACT.useRef(false);
+  const host = useRef(null);
+  const started = useRef(false);
 
-  globalThis.SP_REACT.useEffect(() => {
+  useEffect(() => {
     if (started.current || !host.current?.ownerDocument) {
       return undefined;
     }
@@ -339,7 +340,7 @@ function LibraryPickerModalHost({ context, onFinished }) {
     return undefined;
   }, [context, onFinished]);
 
-  return globalThis.SP_REACT.createElement(
+  return createElement(
     ModalRoot,
     {
       closeModal: () => onFinished(undefined),
@@ -347,7 +348,7 @@ function LibraryPickerModalHost({ context, onFinished }) {
       bHideCloseIcon: true,
       bHideActionIcons: true,
     },
-    globalThis.SP_REACT.createElement("div", { ref: host }),
+    createElement("div", { ref: host }),
   );
 }
 
@@ -381,7 +382,7 @@ function shareLibraryGame(context) {
   };
 
   modal = showModal(
-    globalThis.SP_REACT.createElement(LibraryPickerModalHost, { context, onFinished: finish }),
+    createElement(LibraryPickerModalHost, { context, onFinished: finish }),
     undefined,
     {
       strTitle: "Share with Friends",
@@ -724,7 +725,7 @@ function injectNativeLibraryShareItem(
     return renderedMenu;
   }
 
-  const shareItem = globalThis.SP_REACT.createElement(
+  const shareItem = createElement(
     MenuItem,
     {
       key: "steam-share-library-context",
